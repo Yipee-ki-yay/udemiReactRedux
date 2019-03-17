@@ -52,7 +52,7 @@ export default class TodoListItem extends Component {
       
         <span 
           className="todo-list-item-label" 
-          onClick={this.onLabelClick.bind(this)}
+          onClick={this.onLabelClick}
         >
           {label}
         </span>

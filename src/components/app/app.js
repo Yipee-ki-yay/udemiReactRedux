@@ -4,6 +4,7 @@ import AppHeader from '../app-header'
 import SearchPanel from '../search-panel'
 import TodoList from '../todo-list'
 import ItemStatusFilter from '../item-status-filter'
+import ItemAddForm from '../item-add-form'
 
 import './app.css'
 
@@ -37,6 +38,29 @@ export default class App extends Component {
     });
   } 
 
+  addItem = (text) => {
+    // console.log(text);
+    let item = {
+      label: text, 
+      important: false, 
+      id: this.state.todoData.length + 1,
+    }
+
+    this.setState(({ todoData }) => {      
+      console.log(item);
+      // return todoData.push(item); //Нельзя менять существующий массив!!
+
+      const newArray = [
+        ...todoData,
+        item
+      ]
+
+      return {
+        todoData: newArray,
+      }
+    });
+  }
+
   render() {
 
     return (
@@ -50,9 +74,10 @@ export default class App extends Component {
           todos={this.state.todoData} 
           onDeleted={ this.deleteItem }
         />
-        <button
-          
-        >Add item</button>
+        <ItemAddForm onAddItem={ this.addItem } />
+        {/* <button
+          onClick={ this.addItem }
+        >Add item</button> */}
       </div>
     );
 
